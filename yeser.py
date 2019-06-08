@@ -3,7 +3,6 @@ import os
 import time
 from flask import Flask, request, render_template, send_from_directory
 
-filename = ''
 
 app = Flask(__name__)
 
@@ -27,7 +26,6 @@ def upload():
         print(upload)
         print("{} is the file name".format(upload.filename))
         
-        global filename
         filename = upload.filename
         print("yessss")
         print(filename)
@@ -45,36 +43,5 @@ def upload():
         
     return render_template("complete.html", image_name=filename)
 
-# print(filename)
-
-
-@app.route('/upload/<filename>')
-def send_image(filename):
-    return send_from_directory("out_here", filename)
-
-@app.route('/show/<filename>')
-def epic(filename):
-    return send_from_directory("out_here", filename)
-
-@app.route('/real')
-def someone():
-    global filename
-    model.final(filename)
-    image_names = os.listdir('out_here')
-    print(image_names)
-    time.sleep(3)
-    return render_template("gallery.html", image_name=filename)
-
-  
 if __name__ == "__main__":
     app.run(port=4555, debug=True)
-
-
-
-
-
-
-
-
-
-

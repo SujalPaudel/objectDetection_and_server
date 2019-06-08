@@ -2,8 +2,7 @@ import numpy as np
 import tarfile
 import matplotlib
 import time
-#using the TkAgg library suitable for the GUI operations
-matplotlib.use('TkAgg')
+import uuid
 import zipfile
 import os
 import six.moves.urllib as urllib
@@ -134,12 +133,15 @@ path = 'images'
 
 n = 1
 
-for image_path in os.listdir(path):
+# for image_path in os.listdir(path):
+
+def final(image_path):
 
     input_path = os.path.join(path, image_path)
     image = Image.open(input_path)
 
     #loading the image into the numpy array
+
 
     image_to_np = make_image_to_numpy_array(image)
     #expansion of the image is done, as it is based on the category
@@ -154,8 +156,8 @@ for image_path in os.listdir(path):
     vis_util.visualize_boxes_and_labels_on_image_array(
         image_to_np,
         output_dict['detection_boxes'],
-        None,
-        None,
+        output_dict['detection_classes'],
+        output_dict['detection_scores'],
         category_index,
         instance_masks = output_dict.get('detection_masks'),
         use_normalized_coordinates = True,
@@ -163,11 +165,14 @@ for image_path in os.listdir(path):
 
     plt.figure(figsize = image_size)
     plt.imshow(image_to_np)
-    # output_path = os.path.join('/out_here')
+    out_as = uuid.uuid4().hex
     plt.savefig('out_here/' + image_path)
+
+    return 'The file has successfully processed'
+    
 
     
 
-    print("Image %d is stored in out_here folder" %(n))
+    # print("Image %d is stored in out_here folder" %(n))
 
-    n = n+1
+    # n = n+1
