@@ -165,7 +165,6 @@ def final(image_path):
 
     plt.figure(figsize = image_size)
     plt.imshow(image_to_np)
-    out_as = uuid.uuid4().hex
     plt.savefig('out_here/' + image_path)
 
     return 'The file has successfully processed'

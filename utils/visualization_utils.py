@@ -127,7 +127,7 @@ def draw_bounding_box_on_image_array(image,
                                      ymax,
                                      xmax,
                                      color='red',
-                                     thickness=4,
+                                     thickness=8,
                                      display_str_list=(),
                                      use_normalized_coordinates=True):
   """Adds a bounding box to an image (numpy array).
@@ -191,13 +191,14 @@ def draw_bounding_box_on_image(image,
   """
   draw = ImageDraw.Draw(image)
   im_width, im_height = image.size
+  color = 'DeepPink'
   if use_normalized_coordinates:
     (left, right, top, bottom) = (xmin * im_width, xmax * im_width,
                                   ymin * im_height, ymax * im_height)
   else:
     (left, right, top, bottom) = (xmin, xmax, ymin, ymax)
   draw.line([(left, top), (left, bottom), (right, bottom),
-             (right, top), (left, top)], width=thickness, fill=color)
+             (right, top), (left, top)], width=36, fill=color)
   try:
     font = ImageFont.truetype('arial.ttf', 24)
   except IOError:
@@ -695,7 +696,7 @@ def visualize_boxes_and_labels_on_image_array(
     max_boxes_to_draw=20,
     min_score_thresh=.5,
     agnostic_mode=False,
-    line_thickness=4,
+    line_thickness=8,
     groundtruth_box_visualization_color='black',
     skip_scores=False,
     skip_labels=False,
