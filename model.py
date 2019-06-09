@@ -163,9 +163,13 @@ def final(image_path):
         use_normalized_coordinates = True,
         line_thickness = 8)
 
+
     plt.figure(figsize = image_size)
-    plt.imshow(image_to_np)
-    plt.savefig('out_here/' + image_path)
+    fig = plt.imshow(image_to_np)
+    plt.axis('off')
+    fig.axes.get_xaxis().set_visible(False)
+    fig.axes.get_yaxis().set_visible(False)
+    plt.savefig('out_here/' + image_path, bbox_inches='tight', pad_inches = 0)
 
     return 'The file has successfully processed'
     
